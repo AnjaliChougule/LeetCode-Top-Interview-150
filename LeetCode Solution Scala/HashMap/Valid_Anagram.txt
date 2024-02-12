@@ -1,0 +1,23 @@
+object Solution {
+    def isAnagram(s: String, t: String): Boolean = {
+        var myMap = Map[Char,Int]() 
+        for (i <- 0 until s.length){
+           myMap = myMap + (s.charAt(i) -> (myMap.getOrElse(s.charAt(i),0) + 1))
+        }
+        for (i <- 0 until t.length){
+            if(myMap.contains(t.charAt(i))){
+                myMap +=  (t.charAt(i) -> (myMap(t.charAt(i)) - 1))
+            }
+            else{
+                return false
+            }
+        }
+        for (value <- myMap.values){
+            println(value)
+            if (value != 0) {
+               return false
+            }
+        }
+        true
+    }
+}
